@@ -99,5 +99,5 @@ poetry run mypy .
 
 ## 👤 Author
 
-**DevCybSec** - *Software Security Engineer*
+**Edgar Macias** - *Software Security Engineer*
 
