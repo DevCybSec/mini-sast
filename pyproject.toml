@@ -1,0 +1,52 @@
+[project]
+name = "mini-sast"
+version = "0.1.0"
+description = "A simple SAST tool built with Python and Hexagonal Architecture"
+authors = [
+    {name = "Edgar Macias", email = "edgar.macias@devcybsec.com"}
+]
+readme = "README.md"
+# CORRECCIÓN 1: Bajamos de 3.14 (que aun no es estable) a 3.11 para compatibilidad
+requires-python = ">=3.11"
+dependencies = [
+    "typer[all] (>=0.9.0)",
+    "pydantic (>=2.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "mini_sast", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "pytest (>=8.0.0)",
+    "ruff (>=0.1.0)",
+    "mypy (>=1.0.0)"
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "S"]
+# I: Isort, B: Bugbear, S: Bandit (Security)
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
+# CORRECCIÓN 2: Vital para arreglar el error "Source file found twice" en src layout
+mypy_path = "src"
+explicit_package_bases = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.poetry.scripts]
+# CORRECCIÓN 3: Eliminamos "src." del path. Al instalarse, el paquete es "mini_sast"
+mini-sast = "mini_sast.adapters.cli.main:app"

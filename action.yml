@@ -1,0 +1,31 @@
+# action.yml
+name: 'Mini-SAST Scanner'
+description: 'A Python-based Static Application Security Testing (SAST) tool capable of Regex and AST analysis.'
+author: 'DevCybSec'
+branding:
+  icon: 'shield'  # Icono que aparecerá en el Marketplace
+  color: 'blue'
+
+inputs:
+  path:
+    description: 'Directory or file to scan'
+    required: false
+    default: '.'
+  output:
+    description: 'File path to save the JSON report'
+    required: false
+    default: 'sast-report.json'
+  ignore_dirs:
+    description: 'Comma separated list of directories to ignore'
+    required: false
+    default: '.git,node_modules,__pycache__,.venv,venv'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile' # Usa el archivo local
+  args:
+    - "${{ inputs.path }}"
+    - "--output"
+    - "${{ inputs.output }}"
+    # Nota: Pasar listas complejas como ignore_dirs a veces requiere scripts intermedios,
+    # pero para este MVP, asumiremos el default o pasaremos argumentos simples.
