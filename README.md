@@ -44,7 +44,7 @@ steps:
   - uses: actions/checkout@v3
   
   - name: Run Mini-SAST
-    uses: tu-usuario/mini-sast@v1
+    uses: DevCybSec/mini-sast@v1
     with:
       path: '.'
       output: 'sast-report.json'
@@ -62,7 +62,7 @@ steps:
 1.  **Install with Poetry**:
 
     ```bash
-    git clone [https://github.com/tu-usuario/mini-sast.git](https://github.com/tu-usuario/mini-sast.git)
+    git clone [https://github.com/DevCybSec/mini-sast.git](https://github.com/DevCybSec/mini-sast.git)
     cd mini-sast
     poetry install
     ```
